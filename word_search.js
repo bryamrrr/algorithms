@@ -21,6 +21,18 @@ const rightSearch = (matrix, word, row, column) => {
   return found;
 };
 
+const rightSearch2 = (matrix, word, row, column) => {
+  const wordLetters = word.split("");
+  const wordLen = word.length;
+  for (let i = 0; i < wordLen; i++) {
+    if (matrix[row][column + i] !== wordLetters[i]) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
 const bottomSearch = (matrix, word, row, column) => {
   if (word === "") {
     return true;
@@ -54,7 +66,7 @@ const wordSearch = (matrix, word) => {
     for (let j = 0; j < matrix[i].length; j++) {
       if (matrix[i][j] === wordLetters[0]) {
         const len = word.length;
-        right = rightSearch(matrix, word.slice(1, len), i, j + 1);
+        right = rightSearch2(matrix, word.slice(1, len), i, j + 1);
         bottom = bottomSearch(matrix, word.slice(1, len), i + 1, j);
       }
     }
@@ -74,4 +86,4 @@ matrix = [
   ["A", "N", "O", "B"],
   ["M", "A", "S", "S"],
 ];
-console.log(wordSearch(matrix, "FAC"));
+console.log(wordSearch(matrix, "FOAC"));
