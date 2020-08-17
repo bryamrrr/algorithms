@@ -20,12 +20,14 @@ const twoSum = function (nums, target) {
   let left = 0;
   let right = nums.length - 1;
   nums = nums.sort((a, b) => a - b);
+  let results = [];
 
   while (left < right) {
     const result = nums[left] + nums[right];
 
     if (result === target) {
-      return [left, right];
+      results.push([left, right]);
+      left++;
     } else if (result > target) {
       right--;
     } else {
@@ -33,7 +35,7 @@ const twoSum = function (nums, target) {
     }
   }
 
-  return [];
+  return results;
   /*
     Time complexity = sort = O(log(n)) + loop O(n) = O(n)
     Space complexity = O(1) => Could be O(n) if we need to save multiple combinations

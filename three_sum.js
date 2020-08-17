@@ -20,7 +20,7 @@ const threeSumBruteForce = (arr) => {
 
   /*
     Brute force solution
-    Time complexity: O(n**3)
+    Time complexity: O(n**3) => could be improved to O(n**2) using twoSum O(n) inside a for loop
     Space complexity: O(n)
   */
 };
