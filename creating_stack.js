@@ -41,3 +41,5 @@ class Stack {
 
 const stack = new Stack([0, 2, 3, 4]);
 console.log(stack);
+
+export default Stack;

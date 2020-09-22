@@ -79,6 +79,8 @@ const spiralOrder = function (matrix) {
   const result = [];
 
   while (consecutiveDirectionChanges < 3) {
+    // this could be "number of total elements instead of direction changes",
+    // in this way, I could use a counter for the number of elements already visited
     lector.cleanCurrentValue();
     if (lector.isNextValueValid()) {
       consecutiveDirectionChanges = 0;
@@ -94,6 +96,11 @@ const spiralOrder = function (matrix) {
   }
 
   return result;
+
+  /*
+    Time complexity: linear O(n)
+    Space complexity: linear O(n)
+  */
 };
 
 console.log(
