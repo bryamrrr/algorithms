@@ -47,7 +47,7 @@ const mergeTwoLists = function (l1, l2) {
     n1 = n1.next;
   }
 
-  return dummy.next.print();
+  return dummy.next;
 
   /*
     Time complexity: linear O(n)
@@ -55,10 +55,40 @@ const mergeTwoLists = function (l1, l2) {
   */
 };
 
-const n1 = new ListNode(1, new ListNode(2, new ListNode(4)));
-const n2 = new ListNode(1, new ListNode(3, new ListNode(4)));
-console.log({
-  n1,
-  n2,
-  result: mergeTwoLists(n1, n2),
-});
+const mergelists = function (arr) {
+  let lists = [...arr];
+
+  while (lists.length > 1) {
+    nodes = [];
+
+    let counter = 0;
+    while (counter < Math.ceil(lists.length / 2)) {
+      if (counter === lists.length - 1) {
+        nodes.push(lists[counter]);
+      } else {
+        const result = mergeTwoLists(lists[counter], lists[counter + 1]);
+        console.log("result", result.print());
+        nodes.push(result);
+      }
+
+      lists = nodes;
+      counter++;
+    }
+  }
+
+  return lists[0].print();
+};
+
+// const n1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+// const n2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+// console.log({
+//   n1,
+//   n2,
+//   result: mergeTwoLists(n1, n2),
+// });
+
+const nn1 = new ListNode(1, new ListNode(4, new ListNode(5)));
+const nn2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+const nn3 = new ListNode(1, new ListNode(6));
+
+console.log(mergelists([nn1, nn2, nn3])); // 1->1->2->3->4->4->5->6
