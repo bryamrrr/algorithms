@@ -71,7 +71,7 @@ class MatrixLector {
   };
 }
 
-const spiralOrder = function (matrix) {
+const spiralOrderOld = function (matrix) {
   if (matrix.length === 0) return [];
 
   const lector = new MatrixLector(matrix);
@@ -92,6 +92,65 @@ const spiralOrder = function (matrix) {
     lector.moveToNextValue();
     if (typeof lector.getCurrentValue() !== "undefined") {
       result.push(lector.getCurrentValue());
+    }
+  }
+
+  return result;
+
+  /*
+    Time complexity: linear O(n)
+    Space complexity: linear O(n)
+  */
+};
+
+const directions = {
+  RIGHT: "DOWN",
+  DOWN: "LEFT",
+  LEFT: "UP",
+  UP: "RIGHT",
+};
+
+const spiralOrder = (matrix) => {
+  total = matrix.length * (matrix[0] || []).length;
+  let currentDirection = "RIGHT";
+  let result = [];
+  let vector = [0, 0];
+
+  while (total > 0) {
+    const row = vector[0];
+    const col = vector[1];
+    result.push(matrix[row][col]);
+    matrix[row][col] = undefined;
+    total--;
+
+    if (currentDirection === "RIGHT") {
+      if (typeof (matrix[row] && matrix[row][col + 1]) !== "undefined") {
+        vector[1] = col + 1;
+      } else {
+        currentDirection = directions.RIGHT;
+        vector[0] = row + 1;
+      }
+    } else if (currentDirection === "DOWN") {
+      if (typeof (matrix[row + 1] && matrix[row + 1][col]) !== "undefined") {
+        vector[0] = row + 1;
+      } else {
+        currentDirection = directions.DOWN;
+        vector[1] = col - 1;
+      }
+    } else if (currentDirection === "LEFT") {
+      if (typeof (matrix[row] && matrix[row][col - 1]) !== "undefined") {
+        vector[1] = col - 1;
+      } else {
+        currentDirection = directions.LEFT;
+        vector[0] = row - 1;
+      }
+    } else {
+      if (typeof (matrix[row - 1] && matrix[row - 1][col]) !== "undefined") {
+        vector[0] = row - 1;
+      } else {
+        currentDirection = directions.UP;
+        vector[1] = col + 1;
+      }
     }
   }
 
