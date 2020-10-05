@@ -11,28 +11,54 @@
  * @return {number}
  */
 
-const getNumberOfPaths = (row, col, m, n) => {
-  if (row === m - 1 || col === n - 1) {
+const getPaths = (row, col) => {
+  if (row === 0 || col === 0) {
     return 1;
   }
 
-  const downPaths = getNumberOfPaths(row + 1, col, m, n);
-  const rightPaths = getNumberOfPaths(row, col + 1, m, n);
-
-  return downPaths + rightPaths;
+  return getPaths(row - 1, col) + getPaths(row, col - 1);
 };
 
 const uniquePaths = function (m, n) {
-  if (m === 1 && n === 1) {
-    return 1;
-  }
-  const paths = getNumberOfPaths(1, 0, m, n) + getNumberOfPaths(0, 1, m, n);
-  return paths;
+  return getPaths(m - 1, n - 1);
 
   /*
-    Time complexity: 2**(m*n) exponential
+    Time complexity: O(2**(n)) exponential
     Space complexity: Same
   */
 };
 
-console.log(uniquePaths(3, 2)); // 3
+const generateMatrix = (m, n) => {
+  let result = new Array(m).fill();
+
+  result.forEach((_, index) => {
+    if (index === 0) {
+      result[index] = new Array(n).fill(1);
+    } else {
+      result[index] = new Array(n).fill();
+      result[index][0] = 1;
+    }
+  });
+
+  return result;
+};
+
+const uniquePaths2 = function (m, n) {
+  const matrix = generateMatrix(m, n);
+  for (let row = 1; row < matrix.length; row++) {
+    for (let col = 1; col < matrix[0].length; col++) {
+      if (typeof matrix[row][col] === "undefined") {
+        matrix[row][col] = matrix[row - 1][col] + matrix[row][col - 1];
+      }
+    }
+  }
+
+  return matrix[m - 1][n - 1];
+  /*
+    Time complexity: O(n)
+    Space complexity: O(n)
+  */
+};
+
+console.log(uniquePaths2(3, 2)); // 3
+console.log(uniquePaths2(3, 4)); // 10

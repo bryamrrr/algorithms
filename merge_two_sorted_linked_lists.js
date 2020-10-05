@@ -87,8 +87,40 @@ const mergelists = function (arr) {
 //   result: mergeTwoLists(n1, n2),
 // });
 
+// const nn1 = new ListNode(1, new ListNode(4, new ListNode(5)));
+// const nn2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+// // const nn3 = new ListNode(1, new ListNode(6));
+
+// console.log(mergelists([nn1, nn2, nn3])); // 1->1->2->3->4->4->5->6
+
+const mergeTwoLists2 = (l1, l2) => {
+  let dummy = new ListNode(0);
+  let n = dummy;
+
+  while (l1 && l2) {
+    console.log(n);
+    if (l1.val > l2.val) {
+      dummy.next = l2;
+      l2 = l2.next;
+    } else {
+      dummy.next = l1;
+      l1 = l1.next;
+    }
+    dummy = dummy.next;
+  }
+
+  if (l1) {
+    dummy.next = l1;
+  }
+
+  if (l2) {
+    dummy.next = l2;
+  }
+
+  return n.next.print();
+};
+
 const nn1 = new ListNode(1, new ListNode(4, new ListNode(5)));
 const nn2 = new ListNode(1, new ListNode(3, new ListNode(4)));
-const nn3 = new ListNode(1, new ListNode(6));
 
-console.log(mergelists([nn1, nn2, nn3])); // 1->1->2->3->4->4->5->6
+console.log(mergeTwoLists2(nn1, nn2)); // 1->1->2->3->4->4->5->6

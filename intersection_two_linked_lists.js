@@ -57,10 +57,23 @@ var getIntersectionNode = function (headA, headB) {
   */
 };
 
-const node1 = new ListNode(
-  1,
-  new ListNode(9, new ListNode(1, new ListNode(2, new ListNode(4))))
-);
-const node2 = new ListNode(3, new ListNode(2, new ListNode(4)));
+var getIntersectionNode2 = function (headA, headB) {
+  let dummy = headB;
+  while (headA) {
+    headB = dummy;
+    while (headB) {
+      if (headA === headB) {
+        return headA;
+      } else {
+        headB = headB.next;
+      }
+    }
+    headA = headA.next;
+  }
+};
 
-console.log(getIntersectionNode(node1, node2));
+const node = new ListNode(2, new ListNode(4));
+const node1 = new ListNode(1, new ListNode(9, new ListNode(1, node)));
+const node2 = new ListNode(3, node);
+
+console.log(getIntersectionNode2(node1, node2));
