@@ -66,4 +66,36 @@ const getRanges = (arr) => {
   */
 };
 
-console.log(getRanges([0, 1, 2, 5, 7, 8, 9, 9, 10, 11, 15]));
+/*
+  [0, 1, 2, 5, 7, 8, 9, 9, 10, 11, 15]
+  results = ['5 ~> 5']
+
+  low = 0
+  high = 0
+
+  4 < 12
+    11 >= 9
+*/
+const getRanges2 = (arr) => {
+  if (arr.length === 0) {
+    return [];
+  }
+
+  let results = [];
+  let low = 0;
+  let high = 0;
+
+  while (high < arr.length) {
+    while (arr[high + 1] - arr[high] <= 1) {
+      high++;
+    }
+
+    results.push(`${arr[low]} ~> ${arr[high]}`);
+    high++;
+    low = high;
+  }
+
+  return results;
+};
+
+console.log(getRanges2([0, 1, 2, 5, 7, 8, 9, 9, 10, 11, 15]));

@@ -25,4 +25,54 @@ const threeSumBruteForce = (arr) => {
   */
 };
 
-console.log(threeSumBruteForce([-1, 0, 1, 2, -4, -3])); // Output = [[-1, 0,1], [1,2,-3]]
+const getTwoSum = (num, nums) => {
+  let results = [];
+
+  let low = 0;
+  let high = nums.length - 1;
+
+  while (low < high) {
+    if (nums[low] + nums[high] === -num) {
+      results.push([num, nums[low], nums[high]]);
+
+      low++;
+      while (nums[low - 1] === nums[low]) {
+        low++;
+      }
+    }
+
+    if (nums[low] + nums[high] > -num) {
+      high--;
+    }
+
+    if (nums[low] + nums[high] < -num) {
+      low++;
+    }
+  }
+
+  return results;
+};
+
+const threeSum = (nums) => {
+  let results = [];
+  let lastNumber;
+  let sortedNums = nums.sort((a, b) => a - b);
+
+  let counter = 0;
+  while (counter < sortedNums.length) {
+    const currNumber = sortedNums[counter];
+    if (currNumber !== lastNumber) {
+      const innerResult = getTwoSum(currNumber, [
+        ...sortedNums.slice(counter + 1),
+      ]);
+      results = results.concat(innerResult);
+    }
+
+    lastNumber = currNumber;
+    counter++;
+  }
+
+  return results;
+};
+
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));
