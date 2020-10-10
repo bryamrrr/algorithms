@@ -41,7 +41,7 @@ function WordSearch() {
       results = results.concat(this._getWords(ref[key], string + key));
     });
 
-    return results;
+    return results; 
   };
 }
 

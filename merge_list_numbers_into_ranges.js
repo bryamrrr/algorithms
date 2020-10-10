@@ -66,16 +66,7 @@ const getRanges = (arr) => {
   */
 };
 
-/*
-  [0, 1, 2, 5, 7, 8, 9, 9, 10, 11, 15]
-  results = ['5 ~> 5']
 
-  low = 0
-  high = 0
-
-  4 < 12
-    11 >= 9
-*/
 const getRanges2 = (arr) => {
   if (arr.length === 0) {
     return [];
